@@ -43,9 +43,9 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: test-report-files
-        path: ./test/testreport
+        path: ./testreport
     - name: Print test format
-      run: cat ./testreport/TEST-com.bogolyandras.demoapp.DemoApplicationTests.xml
+      run: cat ./test/testreport/TEST-com.bogolyandras.demoapp.DemoApplicationTests.xml
     - uses: codecov/codecov-action@v2
       with:
         directory: ./testreport
