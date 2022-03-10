@@ -15,9 +15,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -31,3 +29,9 @@ jobs:
       run: ./gradlew clean build
     - name: Execute Gradle test
       run: ./gradlew test
+
+  upload_test_results:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print hello world
+      run: echo "Hello world!"
