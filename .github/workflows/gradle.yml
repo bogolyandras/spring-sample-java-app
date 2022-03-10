@@ -29,9 +29,18 @@ jobs:
       run: ./gradlew clean build
     - name: Execute Gradle test
       run: ./gradlew test
+    - name: Upload test report files
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report-files
+        path: ./build/test-results/test
 
   upload_test_results:
     runs-on: ubuntu-latest
     steps:
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: test-report-files
     - name: Print hello world
       run: echo "Hello world!"
