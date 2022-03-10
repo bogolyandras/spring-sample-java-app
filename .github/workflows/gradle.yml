@@ -47,4 +47,5 @@ jobs:
       run: echo "Hello world!"
     - uses: codecov/codecov-action@v2
       with:
-        files: ./build/test-results/test
+        files: ./build/test-results/test/*
+        fail_ci_if_error: true
