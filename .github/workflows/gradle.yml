@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: test-report-files
-        path: ./build/reports/jacoco/test/jacocoTestReport.xml
+        path: ./build/reports/jacoco/test/
 
   upload_test_results:
     runs-on: ubuntu-latest
@@ -46,5 +46,5 @@ jobs:
         path: ./testReport/
     - uses: codecov/codecov-action@v2
       with:
-        files: ./testReport/jacocoTestReport.xml
+        directory: ./testReport/
         fail_ci_if_error: true
