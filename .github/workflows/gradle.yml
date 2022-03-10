@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: test-report-files
-        path: ./build/test-results/test
+        path: ./build/test-results
 
   upload_test_results:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: test-report-files
-        path: ./testreport
+        path: ./test/testreport
     - name: Print test format
       run: cat ./testreport/TEST-com.bogolyandras.demoapp.DemoApplicationTests.xml
     - uses: codecov/codecov-action@v2
