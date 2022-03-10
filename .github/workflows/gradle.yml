@@ -45,3 +45,6 @@ jobs:
         name: test-report-files
     - name: Print hello world
       run: echo "Hello world!"
+    - uses: codecov/codecov-action@v2
+      with:
+        files: ./build/test-results/test
