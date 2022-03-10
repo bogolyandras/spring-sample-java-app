@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: test-report-files
-        path: ./build/test-results
+        path: ./build/reports/jacoco/test/jacocoTestReport.xml
 
   upload_test_results:
     runs-on: ubuntu-latest
@@ -43,10 +43,8 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: test-report-files
-        path: ./testreport
-    - name: Print test format
-      run: cat ./testreport/test/TEST-com.bogolyandras.demoapp.DemoApplicationTests.xml
+        path: ./testreport/jacocoTestReport.xml
     - uses: codecov/codecov-action@v2
       with:
-        directory: ./testreport
+        files: ./testreport/jacocoTestReport.xml
         fail_ci_if_error: true
