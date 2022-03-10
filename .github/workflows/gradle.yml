@@ -43,9 +43,8 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: test-report-files
-    - name: Print hello world
-      run: echo "Hello world!"
+        path: ./testreport
     - uses: codecov/codecov-action@v2
       with:
-        directory: ./build/test-results/test
+        directory: ./testreport
         fail_ci_if_error: true
