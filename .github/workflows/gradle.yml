@@ -45,7 +45,7 @@ jobs:
         name: test-report-files
         path: ./testreport
     - name: Print test format
-      run: cat ./test/testreport/TEST-com.bogolyandras.demoapp.DemoApplicationTests.xml
+      run: cat ./testreport/test/TEST-com.bogolyandras.demoapp.DemoApplicationTests.xml
     - uses: codecov/codecov-action@v2
       with:
         directory: ./testreport
