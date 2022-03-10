@@ -44,6 +44,8 @@ jobs:
       with:
         name: test-report-files
         path: ./testreport/jacocoTestReport.xml
+    - name: Print test report
+      run: cat ./testreport/jacocoTestReport.xml
     - uses: codecov/codecov-action@v2
       with:
         files: ./testreport/jacocoTestReport.xml
