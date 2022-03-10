@@ -43,10 +43,10 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: test-report-files
-        path: ./testreport/jacocoTestReport.xml
+        path: ./testReport/
     - name: Print test report
-      run: cat ./testreport/jacocoTestReport.xml
+      run: cat ./testReport/jacocoTestReport.xml
     - uses: codecov/codecov-action@v2
       with:
-        files: ./testreport/jacocoTestReport.xml
+        files: ./testReport/jacocoTestReport.xml
         fail_ci_if_error: true
