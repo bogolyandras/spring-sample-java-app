@@ -36,7 +36,7 @@ jobs:
         username: ${{ secrets.BOGOLYANDRAS_DOCKER_ARTIFACTORY_USERNAME }}
         password: ${{ secrets.BOGOLYANDRAS_DOCKER_ARTIFACTORY_TOKEN }}
     - name: Push docker image
-      run: docker push bogolyandras.jfrog.io/artifactory/default-docker-local/demoapp
+      run: docker push bogolyandras.jfrog.io/default-docker-local/demoapp
 #    - name: Docker push
 #      uses: docker/build-push-action@v2
 #      with:
