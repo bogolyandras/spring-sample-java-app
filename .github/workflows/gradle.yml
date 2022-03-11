@@ -36,11 +36,13 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Docker push
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: bogolyandras.jfrog.io/artifactory/default-docker-local/demoapp
+    - name: Push docker image
+      run: docker push bogolyandras.jfrog.io/artifactory/default-docker-local/demoapp
+#    - name: Docker push
+#      uses: docker/build-push-action@v2
+#      with:
+#        push: true
+#        tags: bogolyandras.jfrog.io/artifactory/default-docker-local/demoapp
 
   upload_coverage_report_to_codecov:
     runs-on: ubuntu-latest
