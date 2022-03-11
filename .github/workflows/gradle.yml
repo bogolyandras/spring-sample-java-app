@@ -16,7 +16,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Gradle Build Action
+    - name: Prepare gradle
       uses: gradle/gradle-build-action@v2
     - name: Execute Gradle build and test
       run: ./gradlew clean bootJar test --no-daemon
@@ -25,23 +25,6 @@ jobs:
       with:
         name: test-report-files
         path: ./build/reports/jacoco/test/jacocoTestReport.xml
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
-    - name: Build docker image
-      run: ./gradlew clean bootBuildImage --no-daemon
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        registry: bogolyandras.jfrog.io
-        username: ${{ secrets.BOGOLYANDRAS_DOCKER_ARTIFACTORY_USERNAME }}
-        password: ${{ secrets.BOGOLYANDRAS_DOCKER_ARTIFACTORY_TOKEN }}
-    - name: Push docker image
-      run: docker push bogolyandras.jfrog.io/default-docker-local/demoapp
-#    - name: Docker push
-#      uses: docker/build-push-action@v2
-#      with:
-#        push: true
-#        tags: bogolyandras.jfrog.io/artifactory/default-docker-local/demoapp
 
   upload_coverage_report_to_codecov:
     runs-on: ubuntu-latest
@@ -57,3 +40,23 @@ jobs:
       with:
         files: ./testReport/jacocoTestReport.xml
         fail_ci_if_error: true
+
+  docker_build_and_push:
+    runs-on: ubuntu-latest
+    needs: build_and_test
+    steps:
+     - uses: actions/checkout@v2
+     - name: Prepare gradle
+       uses: gradle/gradle-build-action@v2
+     - name: Set up QEMU
+       uses: docker/setup-qemu-action@v1
+     - name: Build docker image with Gradle
+       run: ./gradlew clean bootBuildImage --no-daemon
+     - name: Login to Artifactory/bogolyandras
+       uses: docker/login-action@v1
+       with:
+         registry: bogolyandras.jfrog.io
+         username: ${{ secrets.BOGOLYANDRAS_DOCKER_ARTIFACTORY_USERNAME }}
+         password: ${{ secrets.BOGOLYANDRAS_DOCKER_ARTIFACTORY_TOKEN }}
+     - name: Push docker image
+       run: docker push bogolyandras.jfrog.io/default-docker-local/demoapp
