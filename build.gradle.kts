@@ -36,5 +36,5 @@ tasks.jacocoTestReport {
 }
 
 tasks.getByName<BootBuildImage>("bootBuildImage") {
-    imageName = "bogolyandras.jfrog.io/artifactory/default-docker-local/${project.name}"
+    imageName = "bogolyandras.jfrog.io/default-docker-local/${project.name}"
 }
