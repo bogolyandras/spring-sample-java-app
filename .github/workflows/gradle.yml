@@ -19,12 +19,13 @@ jobs:
     - name: Prepare gradle
       uses: gradle/gradle-build-action@v2
     - name: Execute Gradle build and test
-      run: ./gradlew clean bootJar test --no-daemon
+      run: ./gradlew clean build test --no-daemon
     - name: Upload test report files
       uses: actions/upload-artifact@v3
       with:
         name: test-report-files
         path: ./build/reports/jacoco/test/jacocoTestReport.xml
+        retention-days: 1
 
   upload_coverage_report_to_codecov:
     runs-on: ubuntu-latest
