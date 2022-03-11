@@ -1,3 +1,6 @@
+
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
     java
     id("org.springframework.boot") version "2.6.3"
@@ -30,4 +33,8 @@ tasks.jacocoTestReport {
         xml.required.set(true)
         csv.required.set(false)
     }
+}
+
+tasks.getByName<BootBuildImage>("bootBuildImage") {
+    imageName = "bogolyandras.jfrog.io/artifactory/default-docker-local/${project.name}"
 }
