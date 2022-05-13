@@ -9,7 +9,7 @@ public class HelloWorldController {
 
     @GetMapping("/helloworld")
     public MessageDto helloWorld() {
-        return new MessageDto("Hello, World! It is a nice day, is it?");
+        return new MessageDto("Hello, World! It is a nice day, isn't it?");
     }
 
 }
