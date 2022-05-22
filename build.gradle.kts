@@ -3,9 +3,10 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     java
+    jacoco
     id("org.springframework.boot") version "2.6.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    jacoco
+    id("com.diffplug.spotless") version "6.6.1"
 }
 
 group = "com.bogolyandras"
@@ -37,4 +38,19 @@ tasks.jacocoTestReport {
 
 tasks.getByName<BootBuildImage>("bootBuildImage") {
     imageName = "bogolyandras.jfrog.io/default-docker-local/${project.name}"
+}
+
+spotless {
+    format("misc") {
+        target("*.gradle", "*.gradle.kts", "*.md", ".gitignore")
+
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    java {
+        importOrder()
+        removeUnusedImports()
+    }
 }
